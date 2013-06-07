@@ -1,5 +1,12 @@
-require 'puppetx/filemapper'
 require 'yaml'
+
+begin
+  require 'puppetx/filemapper'
+rescue LoadError => e
+  require 'pathname'
+  file_mapper = Puppet::Module.find('filemapper', Puppet[:environment].to_s)
+  require File.join file_mapper.path, 'lib/puppetx/filemapper'
+end
 
 Puppet::Type.type(:yaml_setting).provide(:mapped) do
   include PuppetX::FileMapper
