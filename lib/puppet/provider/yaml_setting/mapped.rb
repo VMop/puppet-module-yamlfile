@@ -137,7 +137,7 @@ Puppet::Type.type(:yaml_setting).provide(:mapped) do
       when :array
         provider.value
       when :string
-        provider.value.to_s
+        provider.value.first.to_s
       when :symbol
         provider.value.first.to_sym
       when :fixnum, :integer
